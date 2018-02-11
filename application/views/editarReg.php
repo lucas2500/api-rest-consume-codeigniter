@@ -18,51 +18,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="container">
 		<div class="text-center my-4">
 			<h3>Consumindo api rest</h3>
-			<form action="<?php echo base_url();?>welcome/insertDados" method="post">
+			<form action="<?php echo base_url();?>welcome/editarRegistro" method="post">
 				<div class="form-group my-4">
-					<input type="text" name="nome" id="campo1" placeholder="Nome" class="form-control" required="">
+					<input type="text" name="nome" id="campo1" placeholder="Nome" class="form-control" value="<?php echo $dados->nome; ?>" required="">
 				</div>
 
 				<div class="form-group my-4">
-					<input type="text" name="idade" placeholder="Idade" class="form-control">
+					<input type="text" name="idade" placeholder="Idade" class="form-control"  value="<?php echo $dados->idade; ?>" required="">
 				</div>
 
 				<div class="form-group my-4">
-					<input type="text" name="cargo" placeholder="Cargo" class="form-control">
+					<input type="text" name="cargo" placeholder="Cargo" class="form-control"  value="<?php echo $dados->cargo; ?>" required="">
 				</div>
-				<div class="text-right"><button class="btn btn-primary">Inserir</button></div>
+				<input type="hidden" name="ID" value="<?php echo $dados->ID; ?>">
+				<div class="text-right"><button class="btn btn-primary">Atualizar registro</button></div>
 			</form>
 		</div>
-	</div>
-
-	<div class="container">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Idade</th>
-					<th>Cargo</th>
-					<th>Editar</th>
-					<th>Excluir</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<?php
-				if(!empty($dados)){ 
-					foreach($dados as $DD){
-						echo "<tr>";
-						echo "<td>".$DD->nome."</td>";
-						echo "<td>".$DD->idade."</td>";
-						echo "<td>".$DD->cargo."</td>";
-						echo "<td><a href='/welcome/editarUser/".$DD->ID."'<button class='btn btn-primary'>Ir</button></a></td>";
-						echo "<td><button class='btn btn-danger'>Ir</button></td>";
-						echo "</tr>";			
-					}
-				}
-				?>
-			</tbody>
-		</table>
 	</div>
 </body>
 </html>

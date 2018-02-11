@@ -28,4 +28,30 @@ class Welcome extends CI_Controller {
 		redirect("welcome/index");
 
 	}
+
+	public function editarUser($ID=NULL){
+
+		if($ID == NULL){
+
+			redirect("welcome/index");
+		}
+
+		$data['dados'] = json_decode(alterarDados($ID));
+
+		$this->load->view('editarReg', $data);
+
+	}
+
+	public function editarRegistro(){
+
+		$nome = $this->input->post('nome');
+		$idade = $this->input->post('idade');
+		$cargo = $this->input->post('cargo');
+		$ID = $this->input->post('ID');
+
+		updateDados($nome, $idade, $cargo, $ID);
+
+		redirect("welcome/index");
+
+	}
 }
