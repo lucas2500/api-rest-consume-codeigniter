@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="container">
 		<div class="text-center my-4">
 			<h3>Consumindo api rest</h3>
+			<h4 class="text-left" style="color: #3CB371"><?php echo $msg; ?></h4>
 			<form action="<?php echo base_url();?>welcome/insertDados" method="post">
 				<div class="form-group my-4">
 					<input type="text" name="nome" id="campo1" placeholder="Nome" class="form-control" required="">
@@ -50,19 +51,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<tbody>
 				<?php
 				if(!empty($dados)){ 
+					$cont=0;
 					foreach($dados as $DD){
 						echo "<tr>";
 						echo "<td>".$DD->nome."</td>";
 						echo "<td>".$DD->idade."</td>";
 						echo "<td>".$DD->cargo."</td>";
 						echo "<td><a href='/welcome/editarUser/".$DD->ID."'<button class='btn btn-primary'>Ir</button></a></td>";
-						echo "<td><button class='btn btn-danger'>Ir</button></td>";
-						echo "</tr>";			
+						echo "<td><a href='/welcome/deletar/".$DD->ID."' <button class='btn btn-danger' onclick='return excluirFunc()'>Ir</button></a></td>";
+						echo "</tr>";
+
+						$cont++;			
 					}
 				}
 				?>
 			</tbody>
 		</table>
+		<div class="text-left">Total de funcionários: <strong><?php echo $cont; ?></strong></div>
 	</div>
+
+	<script type="text/javascript">
+		
+		function excluirFunc(){
+
+			var r = confirm("Deseja mesmo excluir este funcionário?");
+
+			if(r){
+
+				return r;
+
+			} else{
+
+				return false;
+			}
+
+		}
+	</script>
 </body>
 </html>

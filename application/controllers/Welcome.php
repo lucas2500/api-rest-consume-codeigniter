@@ -7,9 +7,12 @@ class Welcome extends CI_Controller {
 
 		parent::__construct();
 		$this->load->helper('rest_helper');
+		$this->load->library('session');
 	}
 
 	public function index(){
+
+		$data['msg'] = $this->session->flashdata('msg');
 
 		$data['dados'] =  json_decode(listarDados());
 
@@ -24,6 +27,8 @@ class Welcome extends CI_Controller {
 		$cargo = $this->input->post('cargo');
 
 		inserirDados($nome, $idade, $cargo);
+
+		$this->session->set_flashdata('msg', 'Funcionário cadastrado com sucesso!!');
 		
 		redirect("welcome/index");
 
@@ -50,6 +55,23 @@ class Welcome extends CI_Controller {
 		$ID = $this->input->post('ID');
 
 		updateDados($nome, $idade, $cargo, $ID);
+
+		$this->session->set_flashdata('msg', 'Registro atualizado com sucesso!!');
+
+		redirect("welcome/index");
+
+	}
+
+	public function deletar($ID=NULL){
+
+		if($ID == NULL){
+
+			redirect("welcome/index");
+		}
+
+		deletarDados($ID);
+
+		$this->session->set_flashdata('msg', 'Funcionário deletado com sucesso!!');
 
 		redirect("welcome/index");
 
